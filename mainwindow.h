@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "microphone.h"
+#include "speaker.h"
 #include "networkmanager.h"
 
 #include <QUdpSocket>
@@ -19,12 +20,15 @@ public:
 
 public slots:
     void record();
+    void listen();
 
 private:
     QPushButton start_button;
+    QPushButton shit_into_ears_button;
 
     QByteArray bar;
     microphone mic;
+    speaker speak;
     NetworkManager netman;
 };
 #endif // MAINWINDOW_H
