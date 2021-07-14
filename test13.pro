@@ -18,11 +18,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    microphone.cpp
+    microphone.cpp \
+    networkmanager.cpp \
+    settings.cpp \
+    speaker.cpp
 
 HEADERS += \
     mainwindow.h \
-    microphone.h
+    microphone.h \
+    networkmanager.h \
+    settings.h \
+    speaker.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,11 +1,28 @@
 #ifndef MICROPHONE_H
 #define MICROPHONE_H
 
+#include <QAudioInput>
+#include <QAudioFormat>
+#include <QAudioDeviceInfo>
+#include <QBuffer>
 
-class microphone
+#include "settings.h"
+
+class microphone : public QObject
 {
+    Q_OBJECT
+
 public:
     microphone();
+    ~microphone();
+
+
+public slots:
+
+    void startRecording(QByteArray &b);
+
+private:
+    QAudioInput *audioInput = nullptr;
 };
 
 #endif // MICROPHONE_H

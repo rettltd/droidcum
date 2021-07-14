@@ -4,23 +4,36 @@
 
 microphone::microphone()
 {
-    audioFormat.setChannelCount(2);
-    audioFormat.setSampleRate(16000);
-    audioFormat.setSampleSize(16);
-    audioFormat.setByteOrder(QAudioFormat::Endian::LittleEndian);
-    audioFormat.setSampleType(QAudioFormat::SampleType::UnSignedInt);
-    audioFormat.setCodec("audio/pcm");
+    QAudioFormat &format = settings::audioFormat;
+    QAudioDeviceInfo &adev = settings::audioDeviceInfo;
 
-    audioDeviceInfo = QAudioDeviceInfo::defaultInputDevice();
-    if (!audioDeviceInfo.isFormatSupported(audioFormat))
+    format.setChannelCount(2);
+    format.setSampleRate(16000);
+    format.setSampleSize(16);
+    format.setByteOrder(QAudioFormat::Endian::LittleEndian);
+    format.setSampleType(QAudioFormat::SampleType::UnSignedInt);
+    format.setCodec("audio/pcm");
+
+    adev = QAudioDeviceInfo::defaultInputDevice();
+    if (!adev.isFormatSupported(format))
     {
             qWarning() << "Default format not supported, trying to use the nearest...";
-            audioFormat = audioDeviceInfo.nearestFormat(audioFormat);
+            format = adev.nearestFormat(format);
     }
-    audioInput = new QAudioInput(audioDeviceInfo, audioFormat, this);
+    audioInput = new QAudioInput(adev, format, this);
 }
 
 microphone::~microphone()
 {
     delete audioInput; audioInput = nullptr;
+}
+
+void microphone::startRecording(QByteArray &b)
+{
+    b;
+    QBuffer buffer;
+    buffer.open(QBuffer::OpenModeFlag::WriteOnly);
+    buffer.setBuffer(&b);
+
+    audioInput->start(&buffer);
 }
