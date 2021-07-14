@@ -1,0 +1,21 @@
+#ifndef MICROPHONE_H
+#define MICROPHONE_H
+
+#include <QAudioInput>
+#include <QAudioFormat>
+#include <QAudioDeviceInfo>
+
+class microphone : public QObject
+{
+    Q_OBJECT
+    
+public:
+    microphone();
+    ~microphone();
+    
+    QAudioInput *audioInput = nullptr;
+    QAudioFormat audioFormat;
+    QAudioDeviceInfo audioDeviceInfo;
+};
+
+#endif // MICROPHONE_H
