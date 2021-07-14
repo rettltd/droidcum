@@ -7,9 +7,12 @@
 
 class NetworkManager : public QObject
 {
-public:
     Q_OBJECT
+public:
+
     NetworkManager();
+
+    bool hasPendingDatagrams();
 
 public slots:
 
@@ -17,6 +20,7 @@ public slots:
     void receiveDatagram(QByteArray &b);
 
 private:
+
     QUdpSocket socket;
     QString ipaddr = "239.13.69.228";
     quint16 port = 42069;

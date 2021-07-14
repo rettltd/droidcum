@@ -1,24 +1,22 @@
 #ifndef SPEAKER_H
 #define SPEAKER_H
 
-#include <QBuffer>
 #include <QAudioOutput>
-#include <QIODevice>
-#include <QAudioFormat>
+#include <QBuffer>
+
 #include "settings.h"
 
 class speaker : public QObject
 {
-public:
     Q_OBJECT
+public:
     speaker();
 
 public slots:
-    void start(const QByteArray &b);
-    void stop();
+    void start(QByteArray &b);
+
 private:
     QAudioOutput *speak;
-    //QIODevice *device;
 };
 
 #endif // SPEAKER_H

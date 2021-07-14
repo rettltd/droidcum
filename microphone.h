@@ -16,6 +16,7 @@ public:
     microphone();
     ~microphone();
 
+    int status = 0;
 
 public slots:
 

@@ -19,4 +19,11 @@ void NetworkManager::receiveDatagram(QByteArray &b)
     QHostAddress host;
     host.setAddress(ipaddr);
     QNetworkDatagram packet = socket.receiveDatagram();
+
+    b = packet.data();
+}
+
+bool NetworkManager::hasPendingDatagrams()
+{
+    return socket.hasPendingDatagrams();
 }
