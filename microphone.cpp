@@ -8,10 +8,10 @@ microphone::microphone()
     QAudioDeviceInfo &adev = settings::audioDeviceInfo;
 
     format.setChannelCount(2);
-    format.setSampleRate(16000);
-    format.setSampleSize(16);
+    format.setSampleRate(48000);
+    format.setSampleSize(32);
     format.setByteOrder(QAudioFormat::Endian::LittleEndian);
-    format.setSampleType(QAudioFormat::SampleType::UnSignedInt);
+    format.setSampleType(QAudioFormat::SampleType::SignedInt);
     format.setCodec("audio/pcm");
 
     adev = QAudioDeviceInfo::defaultInputDevice();
@@ -39,5 +39,6 @@ void microphone::startRecording(NetworkManager *nm)
     mbuf = new MyBuffer(nm);
     mbuf->open(MyBuffer::OpenModeFlag::WriteOnly);
 
+    //audioInput->setBufferSize(8192); //does not help!
     audioInput->start(mbuf);
 }

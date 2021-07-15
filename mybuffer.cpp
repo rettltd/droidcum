@@ -12,17 +12,26 @@ MyBuffer::~MyBuffer()
 
 void MyBuffer::getFromNet()
 {
-    netManager->receiveDatagram(byteData);
+    //netManager->receiveDatagram(byteData);
     emit QIODevice::readyRead();
 }
 
 qint64 MyBuffer::readData(char *data, qint64 maxlen)
 {
+    qDebug() << "MyBuffer::readData() netManager->hasPendingDatagrams() " << netManager->hasPendingDatagrams();
+    ///
+    /// \brief d
+
+    if(netManager->hasPendingDatagrams())
+        netManager->receiveDatagram(byteData);
+
+    /// \d
+    /// \br
     char* d = byteData.data();
-    qDebug() << byteData.size();
+    qDebug() << "MyBuffer::readData() byteData.size() " << byteData.size();
     for(int i=0; i<byteData.size(); i++)
     {
-        qDebug() << d[i];
+        //qDebug() << d[i];
         data[i] = d[i];
     }
     return maxlen;

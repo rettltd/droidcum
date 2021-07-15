@@ -25,7 +25,7 @@ void NetworkManager::receiveDatagram(QByteArray& b)
     QNetworkDatagram packet = socket.receiveDatagram();
 
     b = packet.data();
-    qDebug() << b.size();
+    qDebug() << "NetworkManager::receiveDatagram(QByteArray& b) b.size() " << b.size();
 }
 
 bool NetworkManager::hasPendingDatagrams()
