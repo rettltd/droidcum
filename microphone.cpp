@@ -9,7 +9,7 @@ microphone::microphone()
 
     format.setChannelCount(2);
     format.setSampleRate(48000);
-    format.setSampleSize(32);
+    format.setSampleSize(16);
     format.setByteOrder(QAudioFormat::Endian::LittleEndian);
     format.setSampleType(QAudioFormat::SampleType::SignedInt);
     format.setCodec("audio/pcm");

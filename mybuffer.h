@@ -15,8 +15,10 @@ public:
 
     NetworkManager *netManager;
 
+    /*
 public slots:
     void getFromNet();
+    */
 
 protected:
     qint64 readData(char *data, qint64 maxlen) override;

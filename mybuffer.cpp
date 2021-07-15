@@ -2,7 +2,7 @@
 
 MyBuffer::MyBuffer(NetworkManager *n, QObject *parent) : QIODevice(parent), netManager(n)
 {
-    connect(&(n->socket), &QUdpSocket::readyRead, this, &MyBuffer::getFromNet);
+    //connect(&(n->socket), &QUdpSocket::readyRead, this, &MyBuffer::getFromNet);
 }
 
 MyBuffer::~MyBuffer()
@@ -10,11 +10,13 @@ MyBuffer::~MyBuffer()
 
 }
 
+/*
 void MyBuffer::getFromNet()
 {
     //netManager->receiveDatagram(byteData);
-    emit QIODevice::readyRead();
+    //emit QIODevice::readyRead();
 }
+*/
 
 qint64 MyBuffer::readData(char *data, qint64 maxlen)
 {
@@ -22,8 +24,14 @@ qint64 MyBuffer::readData(char *data, qint64 maxlen)
     ///
     /// \brief d
 
-    if(netManager->hasPendingDatagrams())
-        netManager->receiveDatagram(byteData);
+    byteData.clear();
+
+    while (netManager->hasPendingDatagrams())
+    {
+        QByteArray t;
+        netManager->receiveDatagram(t);
+        byteData.append(t);
+    }
 
     /// \d
     /// \br
@@ -39,6 +47,7 @@ qint64 MyBuffer::readData(char *data, qint64 maxlen)
 
 qint64 MyBuffer::writeData(const char *data, qint64 len)
 {
+    qDebug() << "MyBuffer::writeData() qint64 len: " << len;
     netManager->sendDatagram(QByteArray(data, len));
     return len;
 }
