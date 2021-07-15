@@ -5,11 +5,13 @@ speaker::speaker()
 
 }
 
-void speaker::start(QByteArray &b)
+void speaker::start(NetworkManager *nm)
 {
-    speak = new QAudioOutput(settings::audioDeviceInfo, settings::audioFormat, this);
 
-    QBuffer buf(&b, this);
+    speak = new QAudioOutput(settings::audioFormat, this);
 
-    speak->start(&buf);
+    mbuf = new MyBuffer(nm);
+    mbuf->open(QIODevice::OpenModeFlag::ReadOnly);
+
+    speak->start(mbuf);
 }

@@ -19,6 +19,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     microphone.cpp \
+    mybuffer.cpp \
     networkmanager.cpp \
     settings.cpp \
     speaker.cpp
@@ -26,6 +27,7 @@ SOURCES += \
 HEADERS += \
     mainwindow.h \
     microphone.h \
+    mybuffer.h \
     networkmanager.h \
     settings.h \
     speaker.h

@@ -13,6 +13,7 @@ public:
     NetworkManager();
 
     bool hasPendingDatagrams();
+    QUdpSocket socket;
 
 public slots:
 
@@ -21,8 +22,9 @@ public slots:
 
 private:
 
-    QUdpSocket socket;
+
     QString ipaddr = "239.13.69.228";
+    //QString ipaddr = "192.168.0.255";
     quint16 port = 42069;
 };
 

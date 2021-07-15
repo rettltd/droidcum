@@ -4,8 +4,8 @@
 #include <QAudioInput>
 #include <QAudioFormat>
 #include <QAudioDeviceInfo>
-#include <QBuffer>
 
+#include "mybuffer.h"
 #include "settings.h"
 
 class microphone : public QObject
@@ -20,10 +20,11 @@ public:
 
 public slots:
 
-    void startRecording(QByteArray &b);
+    void startRecording(NetworkManager* nm);
 
 private:
     QAudioInput *audioInput = nullptr;
+    MyBuffer *mbuf;
 };
 
 #endif // MICROPHONE_H

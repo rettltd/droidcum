@@ -2,8 +2,8 @@
 #define SPEAKER_H
 
 #include <QAudioOutput>
-#include <QBuffer>
 
+#include "mybuffer.h"
 #include "settings.h"
 
 class speaker : public QObject
@@ -13,10 +13,11 @@ public:
     speaker();
 
 public slots:
-    void start(QByteArray &b);
+    void start(NetworkManager *nm);
 
 private:
     QAudioOutput *speak;
+    MyBuffer *mbuf;
 };
 
 #endif // SPEAKER_H

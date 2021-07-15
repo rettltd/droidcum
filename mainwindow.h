@@ -8,6 +8,7 @@
 
 #include <QUdpSocket>
 #include <QPushButton>
+#include <QLabel>
 
 class MainWindow : public QMainWindow
 {
@@ -25,10 +26,11 @@ public slots:
 private:
     QPushButton start_button;
     QPushButton shit_into_ears_button;
+    QLabel label;
 
-    QByteArray bar;
-    microphone mic;
-    speaker speak;
     NetworkManager netman;
+
+    microphone *mic;
+    speaker *speak;
 };
 #endif // MAINWINDOW_H

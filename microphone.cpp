@@ -29,14 +29,15 @@ microphone::~microphone()
     delete audioInput; audioInput = nullptr;
 }
 
-void microphone::startRecording(QByteArray &b)
+void microphone::startRecording(NetworkManager *nm)
 {
     status = 1;
 
-    QBuffer buffer;
+    //MyBuffer buffer;
 
-    buffer.setBuffer(&b);
-    buffer.open(QBuffer::OpenModeFlag::WriteOnly);
+    //mbuf.setBuffer(&b);
+    mbuf = new MyBuffer(nm);
+    mbuf->open(MyBuffer::OpenModeFlag::WriteOnly);
 
-    audioInput->start(&buffer);
+    audioInput->start(mbuf);
 }
