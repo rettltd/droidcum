@@ -26,6 +26,7 @@ protected:
 
     QByteArray byteData;
 
+    QByteArray inputData;
 };
 
 #endif // MYBUFFER_H
