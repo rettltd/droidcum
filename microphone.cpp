@@ -2,7 +2,7 @@
 
 #include <QDebug>
 
-microphone::microphone()
+microphone::microphone(NetworkManager *n) : net(n)
 {
     QAudioFormat &format = settings::audioFormat;
     QAudioDeviceInfo &adev = settings::audioDeviceInfo;
@@ -29,16 +29,30 @@ microphone::~microphone()
     delete audioInput; audioInput = nullptr;
 }
 
-void microphone::startRecording(NetworkManager *nm)
+void microphone::startRecording(void)
 {
     status = 1;
-
+    //net = new NetworkManager;
     //MyBuffer buffer;
 
     //mbuf.setBuffer(&b);
-    mbuf = new MyBuffer(nm);
-    mbuf->open(MyBuffer::OpenModeFlag::WriteOnly);
+    //mbuf = new MyBuffer(nm);
+    //mbuf->open(MyBuffer::OpenModeFlag::WriteOnly | MyBuffer::OpenModeFlag::Truncate);
 
     //audioInput->setBufferSize(8192); //does not help!
-    audioInput->start(mbuf);
+    //audioInput->start(mbuf);
+    auto io = audioInput->start();
+    io->open(QIODevice::ReadOnly);
+    connect(io, &QIODevice::readyRead,
+        [&, io]() {
+            qint64 len = audioInput->bytesReady();
+            const int BufferSize = 4192;
+            if (len > BufferSize)
+                len = BufferSize;
+
+            QByteArray buffer(len, 0);
+            qint64 l = io->read(buffer.data(), len);
+            if (l > 0)
+                net->sendDatagram(QByteArray(buffer.constData(), l));
+        });
 }

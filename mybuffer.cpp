@@ -48,11 +48,23 @@ qint64 MyBuffer::writeData(const char *data, qint64 len)
         netManager->receiveDatagram(t);
         byteData.append(t);
     }
-    */
-    if (inputData.size() < 16384)
+    ///
+    /// \brief len1
+    ///
+    qint64 len1 = m_audioInput->bytesReady();*/
+    //const int BufferSize = 5000;
+    //if (len > BufferSize)
+    //    len = BufferSize;
+
+//    QByteArray buffer(len, 0);
+
+
+
+    if (inputData.size() < 8384)
         inputData.append(QByteArray(data, len));
     else
     {
+
         netManager->sendDatagram(inputData);
         inputData.clear();
     }
