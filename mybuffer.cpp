@@ -24,16 +24,20 @@ qint64 MyBuffer::readData(char *data, qint64 maxlen)
     ///
     /// \brief d
 
-    netManager->receiveDatagram(byteData);
-    /// \d
-    /// \br
-    char* d = byteData.data();
-    qDebug() << "MyBuffer::readData() byteData.size() " << byteData.size();
-    for(int i=0; i<byteData.size(); i++)
+    /*
+    if (netManager->hasPendingDatagrams())
     {
-        //qDebug() << d[i];
+
+
+    }
+    */
+    netManager->receiveDatagram(byteData);
+    /// \br
+    qDebug() << "MyBuffer::readData() byteData.size() " << byteData.size();
+    for(int i=0; i<byteData.size(); ++i)
+    {
         if(i > maxlen) break;
-        data[i] = d[i];
+            data[i] = byteData.at(i);
     }
     return maxlen;
 }
@@ -41,32 +45,22 @@ qint64 MyBuffer::readData(char *data, qint64 maxlen)
 qint64 MyBuffer::writeData(const char *data, qint64 len)
 {
     qDebug() << "MyBuffer::writeData() qint64 len: " << len;
-    /*
-    while (netManager->hasPendingDatagrams())
-    {
-        QByteArray t;
-        netManager->receiveDatagram(t);
-        byteData.append(t);
-    }
-    ///
-    /// \brief len1
-    ///
-    qint64 len1 = m_audioInput->bytesReady();*/
-    //const int BufferSize = 5000;
-    //if (len > BufferSize)
-    //    len = BufferSize;
-
-//    QByteArray buffer(len, 0);
 
 
-
-    if (inputData.size() < 8384)
+    if (inputData.size() < 18000)
         inputData.append(QByteArray(data, len));
     else
     {
-
+        inputData.truncate(16384);
         netManager->sendDatagram(inputData);
         inputData.clear();
     }
+
+
+/*
+    QByteArray written(data, len);
+    netManager->sendDatagram(written);
+*/
+
     return len;
 }

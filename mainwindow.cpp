@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&shit_into_ears_button, &QPushButton::pressed, this,  &MainWindow::listen);
 
     //connect(&netman.socket, &QUdpSocket::readyRead, this, &MainWindow::listen);
-    mic = new microphone(&netman);
+    mic = new microphone();
     speak = new speaker();
 }
 
@@ -35,8 +35,8 @@ MainWindow::~MainWindow()
 void MainWindow::record()
 {
     //mic.status = 1;
-    mic->startRecording();
-    //auto io = mic->start();
+    mic->startRecording(&netman);
+
     /*
     QThread::usleep(12);
     QString msg = "a secret came";

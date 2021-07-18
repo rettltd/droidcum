@@ -7,26 +7,24 @@
 
 #include "mybuffer.h"
 #include "settings.h"
-#include "networkmanager.h"
 
 class microphone : public QObject
 {
     Q_OBJECT
 
 public:
-    microphone(NetworkManager *n = nullptr);
+    microphone();
     ~microphone();
 
     int status = 0;
 
 public slots:
 
-    void startRecording(void);
+    void startRecording(NetworkManager* nm);
 
 private:
     QAudioInput *audioInput = nullptr;
     MyBuffer *mbuf;
-    NetworkManager *net;
 };
 
 #endif // MICROPHONE_H

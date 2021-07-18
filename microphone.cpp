@@ -1,8 +1,9 @@
 #include "microphone.h"
 
 #include <QDebug>
+#include <QBuffer>
 
-microphone::microphone(NetworkManager *n) : net(n)
+microphone::microphone()
 {
     QAudioFormat &format = settings::audioFormat;
     QAudioDeviceInfo &adev = settings::audioDeviceInfo;
@@ -29,30 +30,27 @@ microphone::~microphone()
     delete audioInput; audioInput = nullptr;
 }
 
-void microphone::startRecording(void)
+void microphone::startRecording(NetworkManager *nm)
 {
     status = 1;
-    //net = new NetworkManager;
+
     //MyBuffer buffer;
 
     //mbuf.setBuffer(&b);
-    //mbuf = new MyBuffer(nm);
-    //mbuf->open(MyBuffer::OpenModeFlag::WriteOnly | MyBuffer::OpenModeFlag::Truncate);
 
+    /*
+    mbuf = new MyBuffer(nm);
+    mbuf->open(MyBuffer::OpenModeFlag::WriteOnly);
+    */
+
+    QBuffer *mInputBuffer = new QBuffer();
+    mInputBuffer->open(QBuffer::ReadWrite);
     //audioInput->setBufferSize(8192); //does not help!
-    //audioInput->start(mbuf);
-    auto io = audioInput->start();
-    io->open(QIODevice::ReadOnly);
-    connect(io, &QIODevice::readyRead,
-        [&, io]() {
-            qint64 len = audioInput->bytesReady();
-            const int BufferSize = 4192;
-            if (len > BufferSize)
-                len = BufferSize;
-
-            QByteArray buffer(len, 0);
-            qint64 l = io->read(buffer.data(), len);
-            if (l > 0)
-                net->sendDatagram(QByteArray(buffer.constData(), l));
-        });
+    connect(audioInput, &QAudioInput::notify, [mInputBuffer, nm]{
+        mInputBuffer->seek(0);
+        QByteArray ba = mInputBuffer->readAll();
+        nm->sendDatagram(ba);
+    });
+    audioInput->setNotifyInterval(100);
+    audioInput->start(mInputBuffer);
 }
