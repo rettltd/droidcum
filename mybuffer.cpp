@@ -24,14 +24,17 @@ qint64 MyBuffer::readData(char *data, qint64 maxlen)
     ///
     /// \brief d
 
-    /*
+
     if (netManager->hasPendingDatagrams())
     {
-
-
+        netManager->receiveDatagram(byteData);
     }
-    */
-    netManager->receiveDatagram(byteData);
+    else
+    {
+        //int lastsize = byteData.size();
+        for(int i=0; i<byteData.size(); ++i)
+            byteData[i] = 0;
+    }
     /// \br
     qDebug() << "MyBuffer::readData() byteData.size() " << byteData.size();
     for(int i=0; i<byteData.size(); ++i)
@@ -44,6 +47,7 @@ qint64 MyBuffer::readData(char *data, qint64 maxlen)
 
 qint64 MyBuffer::writeData(const char *data, qint64 len)
 {
+    /*
     qDebug() << "MyBuffer::writeData() qint64 len: " << len;
 
 
@@ -56,11 +60,11 @@ qint64 MyBuffer::writeData(const char *data, qint64 len)
         inputData.clear();
     }
 
-
+*/
 /*
     QByteArray written(data, len);
     netManager->sendDatagram(written);
 */
-
+    Q_UNUSED(data)
     return len;
 }

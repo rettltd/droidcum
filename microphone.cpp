@@ -34,23 +34,17 @@ void microphone::startRecording(NetworkManager *nm)
 {
     status = 1;
 
-    //MyBuffer buffer;
+    QBuffer *inputBuf = new QBuffer();
+    inputBuf->open(QBuffer::ReadWrite);
 
-    //mbuf.setBuffer(&b);
-
-    /*
-    mbuf = new MyBuffer(nm);
-    mbuf->open(MyBuffer::OpenModeFlag::WriteOnly);
-    */
-
-    QBuffer *mInputBuffer = new QBuffer();
-    mInputBuffer->open(QBuffer::ReadWrite);
     //audioInput->setBufferSize(8192); //does not help!
-    connect(audioInput, &QAudioInput::notify, [mInputBuffer, nm]{
-        mInputBuffer->seek(0);
-        QByteArray ba = mInputBuffer->readAll();
+
+    connect(audioInput, &QAudioInput::notify, [inputBuf, nm]{
+        inputBuf->seek(0);
+        QByteArray ba = inputBuf->readAll();
         nm->sendDatagram(ba);
+        inputBuf->reset();
     });
     audioInput->setNotifyInterval(100);
-    audioInput->start(mInputBuffer);
+    audioInput->start(inputBuf);
 }
