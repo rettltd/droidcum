@@ -1,4 +1,4 @@
-QT       += core gui multimedia
+QT       += core gui multimedia multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,21 +16,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    camera.cpp \
     main.cpp \
     mainwindow.cpp \
     microphone.cpp \
     mybuffer.cpp \
+    myvideosurface.cpp \
     networkmanager.cpp \
     settings.cpp \
-    speaker.cpp
+    speaker.cpp \
+    videostream.cpp
 
 HEADERS += \
+    camera.h \
     mainwindow.h \
     microphone.h \
     mybuffer.h \
+    myvideosurface.h \
     networkmanager.h \
     settings.h \
-    speaker.h
+    speaker.h \
+    videostream.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

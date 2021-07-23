@@ -6,7 +6,7 @@
 microphone::microphone()
 {
     QAudioFormat &format = settings::audioFormat;
-    QAudioDeviceInfo &adev = settings::audioDeviceInfo;
+    QAudioDeviceInfo &adev = settings::audioInDeviceInfo;
 
     format.setChannelCount(2);
     format.setSampleRate(48000);

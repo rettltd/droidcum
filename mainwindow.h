@@ -9,6 +9,8 @@
 #include <QUdpSocket>
 #include <QPushButton>
 #include <QLabel>
+#include <QVideoWidget>
+#include <QMediaPlayer>
 
 class MainWindow : public QMainWindow
 {
@@ -27,6 +29,9 @@ private:
     QPushButton start_button;
     QPushButton shit_into_ears_button;
     QLabel label;
+    QVideoWidget videoWidget;
+    QMediaPlayer *mediaReceiver;
+    QMediaPlayer *sender;
 
     NetworkManager netman;
 

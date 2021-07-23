@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.12.4, 2021-07-15T15:26:37. -->
+<!-- Written by QtCreator 4.12.4, 2021-07-23T01:23:39. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -306,8 +306,9 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/max/work/test13/test13.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/max/work/test13/test13.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">test132</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/max/work/droidcum/droidcum/test13.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/max/work/droidcum/droidcum/test13.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -614,7 +615,6 @@
     <valuelist type="QVariantList" key="Android.PreStartShellCmdListKey"/>
     <value type="int" key="PE.EnvironmentAspect.Base">0</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">test13</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.AndroidRunConfiguration:/home/max/work/test13/test13.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/max/work/test13/test13.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>

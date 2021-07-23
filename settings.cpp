@@ -1,7 +1,10 @@
 #include "settings.h"
 
 QAudioFormat settings::audioFormat;
-QAudioDeviceInfo settings::audioDeviceInfo;
+QAudioDeviceInfo settings::audioInDeviceInfo;
+QAudioDeviceInfo settings::audioOutDeviceInfo;
+QCameraInfo settings::cameraInfo;
+QVideoEncoderSettings settings::videoEncoding;
 
 settings::settings()
 {

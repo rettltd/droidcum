@@ -3,13 +3,19 @@
 
 #include <QAudioFormat>
 #include <QAudioDeviceInfo>
+#include <QCameraInfo>
+#include <QVideoEncoderSettings>
 
 class settings
 {
 public:
     settings();
     static QAudioFormat audioFormat;
-    static QAudioDeviceInfo audioDeviceInfo;
+    static QAudioDeviceInfo audioInDeviceInfo;
+    static QAudioDeviceInfo audioOutDeviceInfo;
+
+    static QVideoEncoderSettings videoEncoding;
+    static QCameraInfo cameraInfo;
 
 };
 
